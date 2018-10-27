@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> The Impact and Future of Agriculture on the United States</title>
+  <link rel="stylesheet" href="styles/index.css">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <header>
+    <p> Created by Joshua Baker for JOU 3363.</p>
+  </header>
+</head>
+
+<body>
+  <h1>
+    The Impact and Future of Agriculture on the United States
+  </h1>
+  <p>Agriculture is one of the most important parts of the United States economy. Because food production is so vital to our country, the effects of agriculutral production can often be overlooked. With a growing population rate, the United States has seen a decrease in total arable land that can be used for agriculutral production. The graph below shows the trends between available farm land and population  growth in the United States. </p>
+  <div id="container" style="width:100%; height:400px;">
+    var chart1; // globally available</div>
+    <a href="https://data.worldbank.org/">Data collected from worldbank.org</a>
+  <p>
+    Feeding the growing population is not the only worry concerning agricultural practices. Fertilizers and other chemicals used on crops can pollute the soil with nitrous oxide and other greenhouse gases. Farming and livestock production also creates large amounts of methane gas.
+  </p>
+  <div id="container2" style="width:100%; height:400px;">
+      var chart1; // globally available</div>
+  <a href="https://data.worldbank.org/">Data collected from worldbank.org</a>
+<script>
+  Highcharts.chart('container', {
+  chart: {
+    zoomType: 'xy'
+  },
+  title: {
+    text: 'Population Growth Versus Arable land area in the United States'
+  },
+  subtitle: {
+    text: 'Source: Worldbank.org'
+  },
+  xAxis: [{
+    categories: ['1995', '1997', '1999', '2001', '2003', '2005', '2007',
+      '2009', '2011', '2013', '2015'
+    ],
+    crosshair: true
+  }],
+  yAxis: [{ // Primary yAxis
+    labels: {
+      format: '{value}% land area',
+      style: {
+        color: Highcharts.getOptions().colors[1]
+      }
+    },
+    title: {
+      text: 'Perectage of Arable Land Area in the United States',
+      style: {
+        color: Highcharts.getOptions().colors[1]
+      }
+    }
+  }, { // Secondary yAxis
+    title: {
+      text: 'Population of United States (in hundred millions)',
+      style: {
+        color: Highcharts.getOptions().colors[0]
+      }
+    },
+    labels: {
+      format: '{value} hundred million',
+      style: {
+        color: Highcharts.getOptions().colors[0]
+      }
+    },
+    opposite: true
+  }],
+  tooltip: {
+    shared: true
+  },
+  legend: {
+    layout: 'vertical',
+    align: 'left',
+    x: 120,
+    verticalAlign: 'top',
+    y: 100,
+    floating: true,
+    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255,255,255,0.25)'
+  },
+  series: [{
+    name: 'Population',
+    type: 'spline',
+    yAxis: 1,
+    data: [2.66, 2.736, 2.79, 2.85, 2.90, 2.96, 3.01, 3.02, 3.12, 3.16, 3.21],
+    tooltip: {
+      valueSuffix: ' hundred million'
+    }
+
+  }, {
+    name: 'Arable Land',
+    type: 'spline',
+    data: [19.85, 19.39, 19.15, 19.14, 18.73, 18.02, 17.67, 17.26, 16.58, 16.64, 16.65],
+    tooltip: {
+      valueSuffix: ' % land area'
+    }
+  }]
+});
+
+Highcharts.chart('container2', {
+  chart: {
+    type: 'area'
+  },
+  title: {
+    text: 'Percentage of Agricultural Methane and Nitrous Oxide Emissions in the United States'
+  },
+  subtitle: {
+    text: 'Sources: <a href="http://www.worldbank.org/">' +
+      'worldbank.org</a>'
+  },
+  xAxis: {
+    allowDecimals: false,
+    labels: {
+      formatter: function() {
+        return this.value; // clean, unformatted number for year
+      }
+    }
+  },
+  yAxis: {
+    title: {
+      text: 'Percentage of Total US Emissions'
+    },
+    labels: {
+      formatter: function() {
+        return this.value / 1 + '%';
+      }
+    }
+  },
+  tooltip: {
+    pointFormat: '{series.name} was <b>{point.y:,.0f}</b><br/>% in {point.x}'
+  },
+  plotOptions: {
+    area: {
+      pointStart: 1970,
+      marker: {
+        enabled: false,
+        symbol: 'circle',
+        radius: 2,
+        states: {
+          hover: {
+            enabled: true
+          }
+        }
+      }
+    }
+  },
+  series: [{
+    name: 'Percent of Agricultural Nitrogen Emissions',
+    data: [
+      30.822, 32.372, 32.1, 32.26, 33.442, 33.681, 32.765, 32.59, 32.346, 30.793, 31.364, 32.127, 31.89, 31.715, 30.944, 30.412, 29.719, 28.834, 28.359, 27.749, 27.09, 27.721, 28.569, 29.099, 29.877, 30.835, 31.178, 31.432, 32.148, 32.866, 33.277, 33.633, 33.811, 33.735, 34.397, 35.399, 35.575, 35.877, 35.951
+    ]
+  }, {
+    name: 'Percent of Agricultural Nitrous Oxide Emissions',
+    data: [39.936, 40.017, 39.746, 40.514, 39.488, 43.628, 41.306, 40.565, 40.598, 40.735, 41.703, 42.448, 44.066, 42.986, 43.544, 43.001, 42.309, 41.577, 38.79, 40.538, 46.127, 46.434, 46.932, 46.468, 46.699, 46.237, 46.264, 47.248, 49.938, 50.64, 51.934, 53.831, 53.625, 54.945, 55.675, 55.861, 56.574, 56.167, 57.634]
+  }]
+});
+
+</script>
+</body>
+
+</html>
